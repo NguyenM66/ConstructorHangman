@@ -11,9 +11,48 @@ var wordArray = ["Great Wall", "Petra", "Colosseum", "Chichen Itza", "Machu Picc
 // Random word from array
 var guessWord = wordArray[Math.floor(Math.random() * wordArray.length)];
 console.log("Word to guess:", guessWord);
+var userGuess = "";
+
+var newWord = new Word(guessWord, userGuess);
 
 // Create word with with consturctor and storing it in newWord
-var newWord = new Word(guessWord);
+function playHangman(){
+	inquirer
+	.prompt([
+		{
+			type: "list",
+			message: "Would you like to play The 7 Wonders of the World hangman?\n",
+			choices:["Yes", "No"],
+			name: "play"
+		}
+		]).then(function(inquirerResponse) {
+			console.log("user said: " + inquirerResponse.play);
+			userSaid = inquirerResponse.play;
+			if(userSaid == "Yes"){
+				round(5);
+			}else if(userSaid == "No"){
+				process.exit();
+			}
+		})
+}
+
+function round(tries){
+	if(tries == 0){
+		console.log("GameOver!");
+		playHangman();
+	}
+	inquirer
+	.prompt([
+		{
+			type: "input",
+			message: "Guess a letter!\n",
+			name: "guess"
+		}
+		]).then(function(inquirerResponse) {
+			console.log("user guess is: " + inquirerResponse.guess);
+			userGuess = inquirerResponse.guess;
+		})
+}
 
 newWord.convertToArray();
 // take user input letter and test
