@@ -8,7 +8,7 @@ var Word = require("./word.js");
 var inquirer = require("inquirer");
 
 var wordArray = ["Great Wall", "Petra", "Colosseum", "Chichen Itza", "Machu Picchu", "Taj Mahal", "Christ the Redeemer"];
-
+var array = [];
 
 // Create word with with consturctor and storing it in newWord
 function playHangman(){
@@ -34,12 +34,14 @@ function playHangman(){
 }
 
 function round(tries){
+	//generate random word to guess
 	var guessWord = wordArray[Math.floor(Math.random() * wordArray.length)];
 	console.log("Word to guess:", guessWord);
 	var userGuess = "";
 
 	var newWord = new Word(guessWord);
 
+	//if number of tries is 0 then game over
 	if(tries == 0){
 		console.log("GameOver!");
 		playHangman();
@@ -48,6 +50,32 @@ function round(tries){
 
 	//display hidden word
 	newWord.convertToArray();
+
+	//for each element in displayArray[i]
+
+	for(var i = 0; i < newWord.displayArray.length; i++) {
+		//set letter guessed to ctr
+		//console.log("in loop");
+		//var ctr = checkLetter(userGuess);
+		var stringDisplay = "";
+		if(newWord.displayArray[i].letter == " "){
+			array.push(" ");
+		}else{
+			array.push(newWord.displayArray[i].display);
+		}
+		
+
+		// array.forEach(function(element){
+		// 	element = newWord.displayArray[i].display;
+		// 	stringDisplay += newWord.displayArray[i].display;
+		// })
+		//console.log(newWord.displayArray[i].display + " ");
+	}
+
+	console.log("array", array);
+
+	stringDisplay = array.toString().replace(/,/g,"");
+	console.log(stringDisplay);
 
 	inquirer
 	.prompt([
@@ -60,10 +88,24 @@ function round(tries){
 
 			console.log("user guess is: " + inquirerResponse.guess);
 			userGuess = inquirerResponse.guess;
+			new Letter(guess).checkLetter(guess);
 			//tries--;
 			//round(tries);
 		})
+
 }
+
+// var stringDisplay=""
+// var correctCount=0
+
+
+// user guesses:
+//   stringDisplay=""
+//   for each element in newWord.displayArray[i]{
+// 	let ctr = checkLetter(user guess);
+// 	stringDisplay +=newWord.displayArray[i].display
+//    }
+// console.log stringDisplay
 
 playHangman();
 // newWord.convertToArray();
@@ -76,10 +118,6 @@ playHangman();
 // then increment wins
 // if guesses == 0 
 // then increment loss
-
-
-
-//new notes
 
 
 // main collects userguess;
@@ -105,11 +143,6 @@ playHangman();
 
 
 
-
-
-
-
-
 // word object
 // 	-letter objects   newWord.displayArray[i].display
 // 	-check letter method newWord.displayArray[i].checkLetter()
@@ -117,19 +150,6 @@ playHangman();
 
 
 
-
-
-// var stringDisplay=""
-// var correctCount=0
-
-
-// user guesses:
-//   stringDisplay=""
-//   for each element in newWord.displayArray[i]{
-// 	let ctr = checkLetter(user guess);
-// 	stringDisplay +=newWord.displayArray[i].display
-//    }
-// console.log stringDisplay
 
 
 

@@ -22,7 +22,7 @@ var Word = function(word) {
 			// }
 	 		//console.log(this.displayArray);
 	 	}
-		console.log(this.displayArray);
+		//console.log("array of objects", this.displayArray);
 		// this.displayStr = this.displayArray.toString().replace(/,/g,"");
 		// console.log(this.displayStr);
 	};
@@ -44,7 +44,7 @@ var Letter = function(letter) {
 	this.checkLetter = function(guess){
 		if(guess == this.letter){
 			this.display = letter + " ";
-			
+		
 		}
 	}
 
