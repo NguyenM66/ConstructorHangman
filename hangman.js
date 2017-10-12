@@ -4,19 +4,16 @@
 // Prompt if they would like to end the game if none remain
 
 
-Word = require("./word.js");
+var Word = require("./word.js");
 var inquirer = require("inquirer");
 
 var wordArray = ["Great Wall", "Petra", "Colosseum", "Chichen Itza", "Machu Picchu", "Taj Mahal", "Christ the Redeemer"];
-// Random word from array
-var guessWord = wordArray[Math.floor(Math.random() * wordArray.length)];
-console.log("Word to guess:", guessWord);
-var userGuess = "";
 
-var newWord = new Word(guessWord, userGuess);
 
 // Create word with with consturctor and storing it in newWord
 function playHangman(){
+	// Random word from array
+
 	inquirer
 	.prompt([
 		{
@@ -37,9 +34,16 @@ function playHangman(){
 }
 
 function round(tries){
+	var guessWord = wordArray[Math.floor(Math.random() * wordArray.length)];
+	console.log("Word to guess:", guessWord);
+	var userGuess = "";
+
+	var newWord = new Word(guessWord);
+
 	if(tries == 0){
 		console.log("GameOver!");
 		playHangman();
+		return;
 	}
 
 	//display hidden word
@@ -72,3 +76,62 @@ playHangman();
 // then increment wins
 // if guesses == 0 
 // then increment loss
+
+
+
+//new notes
+
+
+// main collects userguess;
+
+
+// let turn = letter(displayArray, letterArray, guess){
+
+// is guess in letterArray?
+//    no? return 0
+//    Yes? 
+// 	was it already guessed?
+// 		yes - return 1
+// 		no - return display array updated
+	
+
+// }
+
+// if turn = 0 evaluate turn as failed
+// if turn = 1 display that it was already guessed
+// else evaluate if the game is WON (displayArray == letterArray);
+// if won playHangman();
+// else update display and prompt for next turn
+
+
+
+
+
+
+
+
+// word object
+// 	-letter objects   newWord.displayArray[i].display
+// 	-check letter method newWord.displayArray[i].checkLetter()
+
+
+
+
+
+
+// var stringDisplay=""
+// var correctCount=0
+
+
+// user guesses:
+//   stringDisplay=""
+//   for each element in newWord.displayArray[i]{
+// 	let ctr = checkLetter(user guess);
+// 	stringDisplay +=newWord.displayArray[i].display
+//    }
+// console.log stringDisplay
+
+
+
+
+
