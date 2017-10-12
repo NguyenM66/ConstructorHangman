@@ -22,6 +22,9 @@ var Word = function(word) {
 			// }
 	 		//console.log(this.displayArray);
 	 	}
+	this.getLetter = function(i){
+		return this.letterArray[i];
+	}
 		//console.log("array of objects", this.displayArray);
 		// this.displayStr = this.displayArray.toString().replace(/,/g,"");
 		// console.log(this.displayStr);
@@ -42,6 +45,7 @@ var Letter = function(letter) {
 	this.display = "_ ";
 	this.letter = letter;
 	this.checkLetter = function(guess){
+		console.log("in checkLetter");
 		if(guess == this.letter){
 			this.display = letter + " ";
 		
@@ -50,5 +54,8 @@ var Letter = function(letter) {
 
 }
 
-module.exports = Word;
+module.exports = {
+	Word: Word,
+	Letter: Letter
+}
 

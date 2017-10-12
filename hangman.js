@@ -85,12 +85,12 @@ function round(tries){
 			name: "guess"
 		}
 		]).then(function(inquirerResponse) {
-
+			var newLetter = new Letter(letter);
 			console.log("user guess is: " + inquirerResponse.guess);
 			userGuess = inquirerResponse.guess;
-			new Letter(guess).checkLetter(guess);
+			newLetter.checkLetter(userGuess);
 			//tries--;
-			//round(tries);
+			round(tries);
 		})
 
 }
