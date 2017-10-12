@@ -4,7 +4,7 @@
 // Prompt if they would like to end the game if none remain
 
 
-var Word = require("./word.js");
+Word = require("./word.js");
 var inquirer = require("inquirer");
 
 var wordArray = ["Great Wall", "Petra", "Colosseum", "Chichen Itza", "Machu Picchu", "Taj Mahal", "Christ the Redeemer"];
@@ -29,7 +29,7 @@ function playHangman(){
 			console.log("user said: " + inquirerResponse.play);
 			userSaid = inquirerResponse.play;
 			if(userSaid == "Yes"){
-				round(5);
+				round(2);
 			}else if(userSaid == "No"){
 				process.exit();
 			}
@@ -41,6 +41,10 @@ function round(tries){
 		console.log("GameOver!");
 		playHangman();
 	}
+
+	//display hidden word
+	newWord.convertToArray();
+
 	inquirer
 	.prompt([
 		{
@@ -49,12 +53,16 @@ function round(tries){
 			name: "guess"
 		}
 		]).then(function(inquirerResponse) {
+
 			console.log("user guess is: " + inquirerResponse.guess);
 			userGuess = inquirerResponse.guess;
+			//tries--;
+			//round(tries);
 		})
 }
 
-newWord.convertToArray();
+playHangman();
+// newWord.convertToArray();
 // take user input letter and test
 // test while letter is >= 0 (in array)
 // replace "_" with guessed letter
